@@ -1,0 +1,31 @@
+{% extends 'base.html' %} {% block main_content %}
+
+<h1>❤️Welcome to the Bank of Happiness ❤️</h1>
+<p>Our functions:</p>
+<ol>
+  <li>Choose and score the listed happy activities for you everyday.</li>
+  <li>Create your own categories of activity that could make you happy.</li>
+  <li>Encrypt the category that you want to keep a secret</li>
+  <li>Leave a comment for each activity</li>
+  <li>Modify the list.</li>
+  <li>Calculate the final score of happiness of any day</li>
+  <li>Draw a graph of the happiness score of the week</li>
+  <li>Calculate the final score of each category</li>
+  <li>Search by category or date</li>
+  <li>Let the system generate a challenge for you to earn extra score</li>
+  <li>Add several lists for different purpose</li>
+  <li></li>
+</ol>
+
+<p>
+  <a href="{{url_for('activities')}}"
+    >Deposit in bank of happiness.(Create a list)</a
+  >
+</p>
+<p>
+  <a href="{{url_for('account')}}">View balance.(Summary)</a>
+</p>
+<p>
+  <a href="{{url_for('account')}}">Open sub-account</a>
+</p>
+{% endblock %}

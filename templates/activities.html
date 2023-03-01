@@ -1,0 +1,41 @@
+{% extends 'base.html' %} {% block main_content %}
+
+<h1>Currency/Activity Catalog</h1>
+<p>Choose the currency(activity) and quantity to deposit in your bank</p>
+Deposit in bank of happiness.(Create a list)
+<table>
+  <tr>
+    <td>Currency</td>
+    >
+    <td>Score</td>
+    <td>Detail and Comments</td>
+    <td>Deposit</td>
+  </tr>
+  {% for activity in activities %}
+  <tr>
+    <!-- 错题： wine[name] 中name 需要是string -->
+    <td>{{activity['name']}}</td>
+    <td>{{activity['score']}}</td>
+    <td>
+      <a href="{{url_for('activity',activity_id=activity['activity_id'])}}"
+        >Details and comments</a
+      >
+    </td>
+    <td>
+      <a
+        href="{{url_for('add_to_account',activity_id=activity['activity_id'])}}"
+        >Deposit</a
+      >
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% endblock %}
+
+<!-- 错题本 
+<table>
+  <tr>
+    <td>{{wines}}</td>
+  </tr>
+</table> -->

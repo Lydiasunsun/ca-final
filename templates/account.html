@@ -1,0 +1,38 @@
+{% extends 'base.html' %} {% block main_content %}
+<h1>Your Account</h1>
+{% if account %}
+<table>
+  <tr>
+    <td>Name</td>
+    <td>Score</td>
+    <td>Quantity</td>
+    <td>Total</td>
+    <td>Modify</td>
+  </tr>
+
+  {% for activity_id in account %}
+  <!-- #why not for wine in wines? -->
+  <tr>
+    <td>{{names[activity_id]}}</td>
+
+    <td>{{scores[activity_id]}}</td>
+    <td>{{account[activity_id]}}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% else %}
+<p>Your account is empty! add more now</p>
+
+{% endif %} {% endblock %}
+<!-- 
+<form action="" method="POST" novalidate>
+  {{form.hidden_tag()}} {{form.checkout.label}}
+  <p>{{form.checkout()}}</p>
+</form> -->
+<!-- 注意endif 是在else 之后 -->
+<!-- <tr>
+              <td>{{wine[wine_id]}}</td>
+              <td>{{wine[name]}}</td>
+              <td>{{wine[score]}}</td>
+            </tr> -->
