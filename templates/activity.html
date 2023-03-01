@@ -3,10 +3,15 @@
 <p>score:{{activity['score']}}</p>
 <p>{{activity['description']}}</p>
 
+<a href="{{url_for('insert_activities',name=name)}}">Add Comments</a>
+<br />
+<a href="{{url_for('add_to_account',activity_id=activity['activity_id'])}}"
+  >Modify this currency</a
+>
+<br />
 <a href="{{url_for('add_to_account',activity_id=activity['activity_id'])}}"
   >Add to Account</a
 >
-<a href="{{url_for('add_to_account',activity_id=activity['activity_id'])}}"></a>
 {% endblock %} '''
 <!-- 这个url 里面一定要写wine_id ？ 还是可以写name？  -->
 <!-- 错误，不需要写for loop % for wine in wines % 因为fetchone 只有一个dictionaty 哪怕是在comment 里面也不可以有jinja的 -->

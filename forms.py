@@ -18,9 +18,11 @@ class LoginForm(FlaskForm):
 
 
 class InsertForm(FlaskForm):
-    name = StringField("New activity")
-    score = DecimalField("Score", placeholder='Number')
-    description = StringField("Description")
+    name = StringField("New activity:")
+    score = DecimalField("Score:")
+    description = StringField("Description:")
+    comment = StringField("Your Comments:")
+    submit = SubmitField()
 
 
 # class CheckoutForm(FlaskForm):

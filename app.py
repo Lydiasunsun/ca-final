@@ -2,9 +2,10 @@ from flask import Flask, render_template, session, redirect, url_for, g, request
 from flask_session import Session
 from database import get_db, close_db
 from werkzeug.security import generate_password_hash, check_password_hash
-from forms import RegistrationForm, LoginForm
+from forms import RegistrationForm, LoginForm, InsertForm
 # , CheckoutForm, GreetingForm
 from functools import wraps
+from datetime import datetime, date
 
 app = Flask(__name__)
 app.teardown_appcontext(close_db)
@@ -144,6 +145,22 @@ def add_to_account(activity_id):
         session['account'][activity_id] = session['account'][activity_id]+1
     return redirect(url_for('account'))
 
+
+@app.route('/insert_activities', methods=['get', 'post'])
+def insert_activities():
+    form = InsertForm()
+    message = ''
+    if form.validate_on_submit():
+        name = form.name.data
+        score = form.score.data
+        description = form.description.data
+        comment = form.comment.data
+        db = get_db()
+        db.execute('''INSERT INTO activities (name,score,description,comment) VALUES(?,?,?,?);''',
+                   (name, score, description, comment))
+        db.commit()
+        message = 'New currency/activity created!'
+    return render_template('insert_activities.html', form=form, message=message)
 
 # @app.route('/name/<name>', methods=['Get', 'POST'])
 # def name(name):
