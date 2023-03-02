@@ -119,6 +119,14 @@ def account():
         names[activity_id] = name
         score = activity['score']
         scores[activity_id] = score
+        print('session is:', session)
+        print("session['account'] is:", session['account'])
+        print('activity is:', activity)
+        print('name is:', name)
+        print('names is:', names)
+        print('score is:', score)
+        print('scores is:', scores)
+        print('account is', account)
     return render_template('account.html', account=session['account'], names=names, scores=scores)
 
 
@@ -133,9 +141,11 @@ def account():
 
 
 @app.route('/add_to_account/<int:activity_id>')
-# why need to put wine_id here? because in the route,so need to say it.
 @login_required
 def add_to_account(activity_id):
+    # print('session is:', session)
+    # print('Account is:', account)
+    # print('dic is:', session['account'])
     if 'account' not in session:
         session['account'] = {}
     # why didn't define wine_id in advance?
@@ -146,17 +156,12 @@ def add_to_account(activity_id):
     return redirect(url_for('account'))
 
 
-# @app.route('/ delete_in_account)
-# # why need to put wine_id here? because in the route,so need to say it.
-# @login_required
-# def delete_in_account():
-#     db = get_db()
-#     for activity_id in session:
-#         activity = db.execute(
-#             '''SELECT * FROM activities WHERE activity_id=?;''', (activity_id,)).fetchone()
-
-#     session['account'][activity_id] = session['account'][activity_id]-1
-#     return redirect(url_for('account'))
+@app.route('/delete_in_account/<int:activity_id>')
+@login_required
+def delete_in_account(activity_id):
+    if activity_id in session['account']:
+        del session['account'][activity_id]
+        return redirect(url_for('account'))
 
 
 @app.route('/insert_activities', methods=['GET', 'post'])

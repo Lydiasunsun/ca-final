@@ -12,7 +12,7 @@
   </tr>
 
   {% for activity_id in account %}
-  <!-- #why not for wine in wines? -->
+
   <tr>
     <td>{{names[activity_id]}}</td>
 
@@ -20,7 +20,11 @@
     <td>{{account[activity_id]}}</td>
     <td></td>
     <td></td>
-    <td></td>
+    <td>
+      <a href="{{url_for('delete_in_account',activity_id=activity_id)}}"
+        >Delete</a
+      >
+    </td>
   </tr>
 
   {% endfor %}
@@ -46,18 +50,12 @@
 </button>
 <button>confirm</button>{% endblock %}
 
-<button>
-  <!-- <a
-    href="{{url_for('delete_in_account',activity_id=activity['activity_id'])}}"
-    >Delete</a
-  > -->
-</button>
-
 <form action="" method="POST" novalidate>
   {{form.hidden_tag()}} {{form.checkout.label}}
   <p>{{form.checkout()}}</p>
 </form>
 -->
+
 <!-- 注意endif 是在else 之后 -->
 <!-- <tr>
               <td>{{wine[wine_id]}}</td>
