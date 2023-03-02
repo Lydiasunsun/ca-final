@@ -3,17 +3,14 @@
 <p>score:{{activity['score']}}</p>
 <p>{{activity['description']}}</p>
 
-<a href="{{url_for('insert_activities',name=name)}}">Add Comments</a>
+<a href="{{url_for('insert_activities',name=name)}}">Modify and Comments</a>
 <br />
-<a href="{{url_for('add_to_account',activity_id=activity['activity_id'])}}"
-  >Modify this currency</a
->
-<br />
+<a href="{{url_for('delete',activity_id=activity['activity_id'])}}">Delete</a>
 
+<br />
 <a href="{{url_for('add_to_account',activity_id=activity['activity_id'])}}"
   >Add to Account</a
 >
-<a href="{{url_for('delete',activity_id=activity['activity_id'])}}">Delete</a>
 {% endblock %} '''
 <!-- <a href="{{url_for('delete',activity_id=activity['activity_id'])}}">Delete</a>
 <br /> -->

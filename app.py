@@ -3,6 +3,7 @@ from flask_session import Session
 from database import get_db, close_db
 from werkzeug.security import generate_password_hash, check_password_hash
 from forms import RegistrationForm, LoginForm, InsertForm,  EncryptForm
+# , UpdateForm
 # , CheckoutForm, GreetingForm
 from functools import wraps
 from datetime import datetime, date
@@ -107,7 +108,7 @@ def activity(activity_id):
 @app.route('/account')
 @login_required
 def account():
-    if 'account' not in session:   # what is a session, how does a  in session? session is a dictionary
+    if 'account' not in session:
         session['account'] = {}
     names = {}
     scores = {}
@@ -164,6 +165,22 @@ def delete_in_account(activity_id):
         return redirect(url_for('account'))
 
 
+@app.route('/upqty/<int:activity_id>')
+@login_required
+def upqty(activity_id):
+    if activity_id in session['account']:
+        session['account'][activity_id] = session['account'][activity_id]+1
+        return redirect(url_for('account'))
+
+
+@app.route('/downqty/<int:activity_id>')
+@login_required
+def downqty(activity_id):
+    if activity_id in session['account']:
+        session['account'][activity_id] = session['account'][activity_id]-1
+        return redirect(url_for('account'))
+
+
 @app.route('/insert_activities', methods=['GET', 'post'])
 def insert_activities():
     form = InsertForm()
@@ -195,25 +212,15 @@ def delete(activity_id):
     db.commit()
     return redirect(url_for('activities'))
 
-# @app.route('/delete/<int:activity_id>', methods=['GEt', 'POST'])
-# def delete(activity_id):
-#     form = DeleteForm()
-#     activity_to_delete = activities.query.get_or_404(activity_id)
-#     try:
-#         db.delete(activity_id)
-#         db.commit()
-#         return render_template('insert_activities.html', form=form, message='Deleted!', activity_id=activity_id)
-#     except:
-#         pass
-# form = DeleteForm()
-# message = ''
-# if form.validate_on_submit():
+
+# @app.route('/comment')
+# @app.route('/update/<int:activity_id>', methods=['GET', 'POST'])
+# def update():
 #     db = get_db()
-#     db.execute(
-#         '''Delete * from activities where activity_id=?;''', (activity_id))
+#     db.execute('''UPDATE activities SET ()WHERE activity_id =?;''',
+#                (activity_id,))
 #     db.commit()
-#     message = 'Deleted!'
-# return render_template('insert_activities.html', form=form, message=message)
+#     return redirect(url_for('activity'))
 # @app.route('/name/<name>', methods=['Get', 'POST'])
 # def name(name):
 #     form = GreetingForm()

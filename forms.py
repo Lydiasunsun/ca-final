@@ -29,15 +29,16 @@ class EncryptForm(FlaskForm):
     encrypt = SubmitField('Encrypt')
 
 
-# class CheckoutForm(FlaskForm):
-#     checkout = SubmitField('Confirm')
+# class UpdateForm(FlaskForm):
 
+    # class CheckoutForm(FlaskForm):
+    #     checkout = SubmitField('Confirm')
 
-# class GreetingForm(FlaskForm):
-#     name = StringField("Your name")
-#     submit = SubmitField()
+    # class GreetingForm(FlaskForm):
+    #     name = StringField("Your name")
+    #     submit = SubmitField()
 
-# class WeatherForm(FlaskForm):
-#     cityName = StringField('City', validators=[input_required()])
-#     submit = SubmitField()
-#     weatherData = StringField('Weather:')
+    # class WeatherForm(FlaskForm):
+    #     cityName = StringField('City', validators=[input_required()])
+    #     submit = SubmitField()
+    #     weatherData = StringField('Weather:')

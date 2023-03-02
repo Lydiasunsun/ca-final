@@ -7,7 +7,6 @@
     <td>Score</td>
     <td>Quantity</td>
     <td>Total</td>
-    <td>Modify</td>
     <td>Delete</td>
   </tr>
 
@@ -17,9 +16,15 @@
     <td>{{names[activity_id]}}</td>
 
     <td>{{scores[activity_id]}}</td>
-    <td>{{account[activity_id]}}</td>
+    <td>
+      <button>
+        <a href="{{url_for('downqty',activity_id=activity_id)}}">-</a></button
+      >{{account[activity_id]}}<button>
+        <a href="{{url_for('upqty',activity_id=activity_id)}}">+</a>
+      </button>
+    </td>
     <td></td>
-    <td></td>
+
     <td>
       <a href="{{url_for('delete_in_account',activity_id=activity_id)}}"
         >Delete</a
@@ -33,7 +38,7 @@
     <td></td>
     <td></td>
     <td></td>
-    <td></td>
+
     <td></td>
   </tr>
 </table>
