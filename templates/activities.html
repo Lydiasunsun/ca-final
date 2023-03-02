@@ -29,7 +29,11 @@ Deposit in bank of happiness.(Create a list)
         >Deposit</a
       >
     </td>
-    <td></td>
+    <td>
+      <a href="{{url_for('delete',activity_id=activity['activity_id'])}}"
+        >Delete</a
+      >
+    </td>
   </tr>
   {% endfor %}
 </table>

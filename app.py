@@ -2,7 +2,7 @@ from flask import Flask, render_template, session, redirect, url_for, g, request
 from flask_session import Session
 from database import get_db, close_db
 from werkzeug.security import generate_password_hash, check_password_hash
-from forms import RegistrationForm, LoginForm, InsertForm, DeleteForm, EncryptForm
+from forms import RegistrationForm, LoginForm, InsertForm,  EncryptForm
 # , CheckoutForm, GreetingForm
 from functools import wraps
 from datetime import datetime, date
@@ -188,15 +188,12 @@ def empty():
     return redirect(url_for('account'))
 
 
-# @app.route('/delete/<int:activity_id>', methods=['GET', 'POST'])
-# def delete():
-#     form = DeleteForm()
-#     message = ''
-#     if form.validate_on_submit():
-#         delete = form.delete.data
-#         db = get_db()
-#         db.execute('''
-
+@app.route('/delete/<int:activity_id>', methods=['GET', 'POST'])
+def delete(activity_id):
+    db = get_db()
+    db.execute('''DELETE FROM activities WHERE activity_id =?;''', (activity_id,))
+    db.commit()
+    return redirect(url_for('activities'))
 
 # @app.route('/delete/<int:activity_id>', methods=['GEt', 'POST'])
 # def delete(activity_id):

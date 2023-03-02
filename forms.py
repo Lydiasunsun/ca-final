@@ -25,10 +25,6 @@ class InsertForm(FlaskForm):
     submit = SubmitField()
 
 
-class DeleteForm(FlaskForm):
-    delete = SubmitField('Delete')
-
-
 class EncryptForm(FlaskForm):
     encrypt = SubmitField('Encrypt')
 
