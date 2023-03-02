@@ -20,8 +20,7 @@
     <td>{{account[activity_id]}}</td>
     <td></td>
     <td></td>
-
-    </td>
+    <td></td>
   </tr>
 
   {% endfor %}
@@ -30,23 +29,35 @@
     <td></td>
     <td></td>
     <td></td>
+    <td></td>
+    <td></td>
   </tr>
 </table>
-
+<button><a href="{{url_for('empty')}}">Empty account</a></button>
 {% else %}
 <p>Your account is empty! add more now</p>
 
-{% endif %} 
-<button>add a category</button>
+{% endif %}
+<button>
+  <a href="{{url_for('activities')}}">Add activity</a>
+</button>
+<button>
+  <a href="{{url_for('insert_activities')}}">create new activity</a>
+</button>
 <button>confirm</button>{% endblock %}
 
-    <!-- <td>
-      <a href="{{url_for('minus_in_account',activity_id=activity['activity_id'])}}"></a>Minus</a> -->
-<!-- 
+<button>
+  <!-- <a
+    href="{{url_for('delete_in_account',activity_id=activity['activity_id'])}}"
+    >Delete</a
+  > -->
+</button>
+
 <form action="" method="POST" novalidate>
   {{form.hidden_tag()}} {{form.checkout.label}}
   <p>{{form.checkout()}}</p>
-</form> -->
+</form>
+-->
 <!-- 注意endif 是在else 之后 -->
 <!-- <tr>
               <td>{{wine[wine_id]}}</td>
