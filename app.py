@@ -2,7 +2,7 @@ from flask import Flask, render_template, session, redirect, url_for, g, request
 from flask_session import Session
 from database import get_db, close_db
 from werkzeug.security import generate_password_hash, check_password_hash
-from forms import RegistrationForm, LoginForm, InsertForm
+from forms import RegistrationForm, LoginForm, InsertForm, DeleteForm, EncryptForm
 # , CheckoutForm, GreetingForm
 from functools import wraps
 from datetime import datetime, date
@@ -146,13 +146,28 @@ def add_to_account(activity_id):
     return redirect(url_for('account'))
 
 
-@app.route('/insert_activities', methods=['get', 'post'])
+# @app.route('/minus_in_account')
+# # why need to put wine_id here? because in the route,so need to say it.
+# @login_required
+# def minus_in_account():
+#     # if 'account' not in session:
+#     #     session['account'] = {}
+#     # # why didn't define wine_id in advance?
+#     # if activity_id not in session['account']:
+#     #     session['account'][activity_id] = 1
+#     # else:
+#     activity_id =
+#     session['account'][activity_id] = session['account'][activity_id]-1
+#     return redirect(url_for('account'))
+
+
+@app.route('/insert_activities', methods=['GET', 'post'])
 def insert_activities():
     form = InsertForm()
     message = ''
     if form.validate_on_submit():
         name = form.name.data
-        score = form.score.data
+        score = int(form.score.data)
         description = form.description.data
         comment = form.comment.data
         db = get_db()
@@ -162,30 +177,52 @@ def insert_activities():
         message = 'New currency/activity created!'
     return render_template('insert_activities.html', form=form, message=message)
 
-# @app.route('/name/<name>', methods=['Get', 'POST'])
-# def name(name):
-#     form = GreetingForm()
-#     if form.validate_on_submit():
 
+@app.route('/delete/<int:activity_id>', methods=['GEt', 'POST'])
+def delete(activity_id):
+    form = DeleteForm()
+    activity_to_delete = activities.query.get_or_404(activity_id)
 
-# return render_template('name.html', form=form, name=name)
+    try:
+        db.delete(activity_id)
+        db.commit()
+        return render_template('insert_activities.html', form=form, message='Deleted!', activity_id=activity_id)
+    except:
+        pass
 
-# @app.route('/weather', methods=["GET", "POST"])
-# def weather():
-#     form = WeatherForm()
-#     weatherData = ''
-#     error = 0
-#     cityName = ''
-#     if form.validate_on_submit:
-#         cityName = form.cityName.data
-#         if cityName:
-#             weatherApiKey = 'e0f6dac5a614708ae4bc38aaedf5d2d7'
-#             url = "https://api.openweathermap.org/data/2.5/weather?q=" +\
-#                 cityName+"&appid=" + weatherApiKey
-#             url = "https://api.openweathermap.org/data/2.5/weather?q=?", (
-#                 cityName,)+"&appid=?", (weatherApiKey,)
-#             print(url)
-#             weatherData = requests.get(url).json()
-#         else:
-#             error = 1
-#     return render_template('index.html', weatherData=weatherData, cityName=cityName, error=error)
+        # form = DeleteForm()
+        # message = ''
+        # if form.validate_on_submit():
+        #     db = get_db()
+        #     db.execute(
+        #         '''Delete * from activities where activity_id=?;''', (activity_id))
+        #     db.commit()
+        #     message = 'Deleted!'
+        # return render_template('insert_activities.html', form=form, message=message)
+
+        # @app.route('/name/<name>', methods=['Get', 'POST'])
+        # def name(name):
+        #     form = GreetingForm()
+        #     if form.validate_on_submit():
+
+        # return render_template('name.html', form=form, name=name)
+
+        # @app.route('/weather', methods=["GET", "POST"])
+        # def weather():
+        #     form = WeatherForm()
+        #     weatherData = ''
+        #     error = 0
+        #     cityName = ''
+        #     if form.validate_on_submit:
+        #         cityName = form.cityName.data
+        #         if cityName:
+        #             weatherApiKey = 'e0f6dac5a614708ae4bc38aaedf5d2d7'
+        #             url = "https://api.openweathermap.org/data/2.5/weather?q=" +\
+        #                 cityName+"&appid=" + weatherApiKey
+        #             url = "https://api.openweathermap.org/data/2.5/weather?q=?", (
+        #                 cityName,)+"&appid=?", (weatherApiKey,)
+        #             print(url)
+        #             weatherData = requests.get(url).json()
+        #         else:
+        #             error = 1
+        #     return render_template('index.html', weatherData=weatherData, cityName=cityName, error=error)

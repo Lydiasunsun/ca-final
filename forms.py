@@ -19,10 +19,18 @@ class LoginForm(FlaskForm):
 
 class InsertForm(FlaskForm):
     name = StringField("New activity:")
-    score = DecimalField("Score:")
+    score = StringField("Score:")
     description = StringField("Description:")
     comment = StringField("Your Comments:")
     submit = SubmitField()
+
+
+class DeleteForm(FlaskForm):
+    delete = SubmitField('Delete')
+
+
+class EncryptForm(FlaskForm):
+    encrypt = SubmitField('Encrypt')
 
 
 # class CheckoutForm(FlaskForm):

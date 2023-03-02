@@ -3,6 +3,7 @@
 <h1>Currency/Activity Catalog</h1>
 <p>Choose the currency(activity) and quantity to deposit in your bank</p>
 Deposit in bank of happiness.(Create a list)
+
 <table>
   <tr>
     <td>Currency</td>
@@ -10,6 +11,7 @@ Deposit in bank of happiness.(Create a list)
     <td>Score</td>
     <td>Detail and Comments</td>
     <td>Deposit</td>
+    <td>Delete</td>
   </tr>
   {% for activity in activities %}
   <tr>
@@ -27,13 +29,19 @@ Deposit in bank of happiness.(Create a list)
         >Deposit</a
       >
     </td>
+    <td>
+      <a href="{{url_for('delete',activity_id=activity['activity_id'])}}"
+        >Delete</a
+      >
+    </td>
   </tr>
   {% endfor %}
 </table>
-<a href="{{url_for('insert_activities',name=name)}}"
-  >Customize your own currency/list</a
->
-{% endblock %}
+<button>
+  <a href="{{url_for('insert_activities',name=name)}}">Add New Currency</a>
+</button>
+
+{{message}} {% endblock %}
 
 <!-- 错题本 
 <table>

@@ -8,6 +8,7 @@
     <td>Quantity</td>
     <td>Total</td>
     <td>Modify</td>
+    <td>Delete</td>
   </tr>
 
   {% for activity_id in account %}
@@ -17,14 +18,30 @@
 
     <td>{{scores[activity_id]}}</td>
     <td>{{account[activity_id]}}</td>
+    <td></td>
+    <td></td>
+
+    </td>
   </tr>
+
   {% endfor %}
+  <tr>
+    <td>Sum</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
 </table>
 
 {% else %}
 <p>Your account is empty! add more now</p>
 
-{% endif %} {% endblock %}
+{% endif %} 
+<button>add a category</button>
+<button>confirm</button>{% endblock %}
+
+    <!-- <td>
+      <a href="{{url_for('minus_in_account',activity_id=activity['activity_id'])}}"></a>Minus</a> -->
 <!-- 
 <form action="" method="POST" novalidate>
   {{form.hidden_tag()}} {{form.checkout.label}}

@@ -1,8 +1,24 @@
 {% extends 'base.html' %} {% block main_content %}
 <h1>Time to customize your own currency/activities!</h1>
-<form action="" ,method="post" ,novalidate>
-  {{form.hidden_tag()}} {{form.name.label}} {{form.name()}} {{form.score.label}}
-  {{form.score()}} {{form.description.label}} {{form.description()}}
-  {{form.comment.label }} {{form.comment()}} {{form.submit()}}
+<form action="" method="post" novalidate>
+  {{form.hidden_tag()}}
+  <table>
+    <tr>
+      <td>{{form.name.label}}</td>
+      <td>{{form.score.label}}</td>
+      <td>{{form.description.label}}</td>
+      <td>{{form.comment.label }}</td>
+    </tr>
+    <tr>
+      <td>{{form.name()}}</td>
+      <td>{{form.score()}}</td>
+      <td>{{form.description()}}</td>
+      <td>{{form.comment()}}</td>
+    </tr>
+  </table>
+  {{form.submit()}} {{message}}
 </form>
+<button>encrypt the secret category</button>
 {% endblock %}
+
+<!-- <form name="EncryptForm">{{form.encrypt.label}}</form> -->
